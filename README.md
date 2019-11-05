@@ -13,7 +13,7 @@ https://www.rmedgar.com/blog/using-rpi-zero-as-keyboard-setup-and-device-definit
 
 To summarize HID gadget setup: add "dwc2" and "libcomposite" lines at the end of DATA/etc/modules on your MicroSD card; also, add "dtoverlay=dwc2" to the end of BOOT/config.txt.
 
-Once you have booted it up, run the "setupkeyboard" script to set up the keyboard (you must do this each time you boot, because it is a volatile configuration.
+Once you have booted it up, run the "setupkeyboard" script to set up the keyboard (you must do this each time you boot, because it is a volatile configuration).
 
 Now you can use keyshell.
 
