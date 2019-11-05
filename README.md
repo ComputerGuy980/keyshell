@@ -1,5 +1,7 @@
 # keyshell
-Yet another HID keyboard script, made for Raspberry Pi Zero W.
+Yet another HID keyboard gadget script, made for Raspberry Pi Zero W.
+
+The intention of this project is to make it very easy to remotely connect (generally ssh) into your Pi Zero and encode and send groups of keystrokes to the host machine in real time.
 
 Written in Python.
 
