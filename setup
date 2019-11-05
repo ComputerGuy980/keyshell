@@ -2,11 +2,11 @@
 
 sudo mkdir /usr/local/keyshell
 
-sudo mv keyshell.py /usr/local/keyshell/keyshell.py
-sudo mv keysdec.py /usr/local/keyshell/keysdec.py
+sudo cp keyshell.py /usr/local/keyshell/keyshell.py
+sudo cp keysdec.py /usr/local/keyshell/keysdec.py
 
 sudo chmod 755 setupkeyboard
-sudo mv setupkeyboard /usr/local/bin/setupkeyboard
+sudo cp setupkeyboard /usr/local/bin/setupkeyboard
 
 sudo chmod 755 keyshell
-sudo mv keyshell /usr/local/bin/keyshell
+sudo cp keyshell /usr/local/bin/keyshell
