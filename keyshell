@@ -1,0 +1,4 @@
+#!/bin/bash
+
+cd /usr/local/keyshell/
+sudo python3 keyshell.py

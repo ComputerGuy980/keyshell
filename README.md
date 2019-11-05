@@ -1,5 +1,7 @@
 # keyshell
-Yet another HID keyboard script, made for Raspberry Pi Zero W.
+Yet another HID keyboard gadget script, made for Raspberry Pi Zero W.
+
+The intention of this project is to make it very easy to remotely connect (generally ssh) into your Pi Zero and encode and send groups of keystrokes to the host machine in real time.
 
 Written in Python.
 
@@ -7,15 +9,17 @@ Written in Python.
 
 To use this, you need to configure your Raspi as a USB HID gadget using ConfigFS.
 
-This series of tutorials I found seem explain the concept perfectly:
+This tutorial, from rmedgar.com, explains how that works in detail:
 
 https://www.rmedgar.com/blog/using-rpi-zero-as-keyboard-setup-and-device-definition
 
-https://www.rmedgar.com/blog/using-rpi-zero-as-keyboard-report-descriptor
+To summarize HID gadget setup: add "dwc2" and "libcomposite" lines at the end of DATA/etc/modules on your MicroSD card; also, add "dtoverlay=dwc2" to the end of BOOT/config.txt.
 
-https://www.rmedgar.com/blog/using-rpi-zero-as-keyboard-send-reports
+Once you have booted it up, run the "setupkeyboard" script to set up the keyboard (you must do this each time you boot, because it is a volatile configuration).
 
-Follow the first two for creation of the HID device, the last one is more about the specifics of keyboard actions.
+Now you can use keyshell.
+
+----
 
 Once you've followed the instructions in the tutorials, simply run "keyshell.py" as root in the same directory as "keysdec.py".
 
