@@ -33,8 +33,9 @@ When you run keyshell, you will be able to enter text at the "keyshell>" prompt.
 
 You can also press enter on an empty line to switch in and out of action mode (where you can enter action keys, as opposed to character keys.
 
-That's it, really.
-
-----
-
-I'm new to GitHub, so bear with me if I set up this repo in a strange way.
+Command Line Arguments (e.g. "keyshell <args>"):
+  -d, device - selects a different virtual HID device
+      ex: "keyshell -d /dev/hidg1"
+  
+  -f, fast - encodes and outputs without saving to a buffer; faster, but timing problems will be more likely
+      ex: "keyshell -f"
