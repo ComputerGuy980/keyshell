@@ -60,21 +60,28 @@ else:
 
 def unpress():
     hidbytes = NULL*8
-
-def flush():
-
-    global buffer
-    buffer.append(NULL*8)
     
-    with open(device, 'rb+') as kb:
-        for c in buffer:
-            kb.write(c.encode())
-        buffer = []
+if speed:
+    def flush():
+        nullcode = NULL*8
+        
+        with open(device, 'rb+') as kb:
+            kb.write(nullcode.encode())
+else:
+    def flush():
 
-##    for c in buffer:
-##        #os.system("echo -ne \"" + c + "\" > /dev/hidg0")
-##        print(c.encode())
-##    buffer = []
+        global buffer
+        buffer.append(NULL*8)
+        
+        with open(device, 'rb+') as kb:
+            for c in buffer:
+                kb.write(c.encode())
+            buffer = []
+
+##        for c in buffer:
+##            #os.system("echo -ne \"" + c + "\" > /dev/hidg0")
+##            print(c.encode())
+##        buffer = []
 
 print()
 print("Keyshell for Raspberry Pi Zero")
@@ -105,8 +112,7 @@ while True:
                         print("unrecognized character: " + current)
                         break
                 lastKey = current
-            if not speed:
-                flush()
+            flush()
         else:
             lastKey = None
             command = input("keyshell act> ")
@@ -124,8 +130,7 @@ while True:
                     print("unrecognized character: " + current)
                     break
                 lastKey = current
-            if not speed:
-                flush()
+            flush()
     except KeyboardInterrupt:
         print("Exiting...")
         sys.exit()
