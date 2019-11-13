@@ -1,44 +1,82 @@
 #!/usr/bin/env python3
 
+print("starting keyshell...")
+
 import keysdec
 import sys
-import os
-from time import sleep
+#from time import sleep
 
 NULL = chr(0)
+
+device = "/dev/hidg0"
+
 hidbytes = NULL*8
 buffer = []
+
 lastKey = None
+
 mode = 0
+speed = False
+
+lastFlag = None
+
+for arg in sys.argv[1:]: # discards name of program, sys.argv[0]
+    if arg[0] == "-": # flag
+        if lastFlag != "d":
+            if arg[1] == "f": # fast mode - less accurate...
+                speed = True
+                print("speed mode on with -f flag")
+            elif arg[1] == "d": # select different
+                lastFlag = "d"
+                continue
+            else:
+                print("error: unrecognized flag: " + str(arg))
+                sys.exit(1)
+        else:
+            print("error: no value given after -d flag")
+    else:
+        if lastFlag == "d":
+            device = arg
+        else:
+            print("error: unrecognized argument: " + str(arg))
+            sys.exit(1)
+            
+
+if speed:
+    def output(code,modifier=NULL):
+        with open(device, 'rb+') as kb:
+            hidbytes = modifier + NULL*2 + code + NULL*4
+            kb.write(hidbytes.encode())
+        #print(hidbytes.encode())
+else:
+    def output(code,modifier=NULL):
+        hidbytes = modifier + NULL*2 + code + NULL*4
+        buffer.append(hidbytes)
+        unpress()
 
 def unpress():
     hidbytes = NULL*8
-
-def output(code,modifier=NULL):
-    hidbytes = modifier + NULL*2 + code + NULL*4
-    buffer.append(hidbytes)
-    unpress()
 
 def flush():
 
     global buffer
     buffer.append(NULL*8)
     
-    with open('/dev/hidg0', 'rb+') as kb:
+    with open(device, 'rb+') as kb:
         for c in buffer:
             kb.write(c.encode())
-            sleep(0.05)
         buffer = []
 
 ##    for c in buffer:
 ##        #os.system("echo -ne \"" + c + "\" > /dev/hidg0")
 ##        print(c.encode())
-##        sleep(0.05)
 ##    buffer = []
 
+print()
 print("Keyshell for Raspberry Pi Zero")
 print("Press CTRL-C to quit")
-print("Press enter on an empty line to switch between action and typing modes")
+print()
+print("Press enter on an empty line to switch between act and type mode")
 print("act codes: n - ENTER, e - ESC, b - DEL, t - TAB, s - secondary SPACE")
 
 while True:
@@ -63,7 +101,8 @@ while True:
                         print("unrecognized character: " + current)
                         break
                 lastKey = current
-            flush()
+            if not speed:
+                flush()
         else:
             lastKey = None
             command = input("keyshell act> ")
@@ -81,7 +120,8 @@ while True:
                     print("unrecognized character: " + current)
                     break
                 lastKey = current
-            flush()
+            if not speed:
+                flush()
     except KeyboardInterrupt:
         print("Exiting...")
         sys.exit()
