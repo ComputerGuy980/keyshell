@@ -34,13 +34,17 @@ for arg in sys.argv[1:]: # discards name of program, sys.argv[0]
                 sys.exit(1)
         else:
             print("error: no value given after -d flag")
+            sys.exit(1)
     else:
         if lastFlag == "d":
             device = arg
         else:
             print("error: unrecognized argument: " + str(arg))
             sys.exit(1)
-            
+
+if lastFlag == "d":
+    print("error: no value given after -d flag")
+    sys.exit(1)  
 
 if speed:
     def output(code,modifier=NULL):
