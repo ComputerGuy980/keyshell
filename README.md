@@ -33,7 +33,7 @@ When you run keyshell, you will be able to enter text at the "keyshell>" prompt.
 
 You can also press enter on an empty line to switch in and out of action mode (where you can enter action keys, as opposed to character keys.
 
-<b>Command Line Arguments (e.g. "keyshell <args>"):</b>
+<b>Command Line Arguments (e.g. "keyshell [args]"):</b>
   
   -d, device - <i>selects a different virtual HID device</i>
   
