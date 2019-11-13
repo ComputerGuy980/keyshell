@@ -33,9 +33,12 @@ When you run keyshell, you will be able to enter text at the "keyshell>" prompt.
 
 You can also press enter on an empty line to switch in and out of action mode (where you can enter action keys, as opposed to character keys.
 
-Command Line Arguments (e.g. "keyshell <args>"):
-  -d, device - selects a different virtual HID device
+<b>Command Line Arguments (e.g. "keyshell <args>"):</b>
+  
+  -d, device - <i>selects a different virtual HID device</i>
+  
       ex: "keyshell -d /dev/hidg1"
   
-  -f, fast - encodes and outputs without saving to a buffer; faster, but timing problems will be more likely
+  -f, fast - <i>encodes and outputs without saving to a buffer; faster, but timing problems will be more likely</i>
+  
       ex: "keyshell -f"
