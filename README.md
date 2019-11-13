@@ -39,3 +39,7 @@ You can also press enter on an empty line to switch in and out of action mode (w
   -f, fast - <i>encodes and outputs without saving to a buffer; faster, but timing problems will be more likely</i>
   
       ex: "keyshell -f"
+      
+  -i, input - <i>outputs text read from a file</i>
+  
+      ex: "keyshell -i text.txt"
