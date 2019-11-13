@@ -1,4 +1,3 @@
 #!/bin/bash
 
-cd /usr/local/keyshell/
-sudo python3 keyshell.py "$@"
+sudo python3 /usr/local/keyshell/keyshell.py "$@"

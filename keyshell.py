@@ -9,6 +9,7 @@ import sys
 NULL = chr(0)
 
 device = "/dev/hidg0"
+inputfile = None
 
 hidbytes = NULL*8
 buffer = []
@@ -22,36 +23,55 @@ lastFlag = None
 
 for arg in sys.argv[1:]: # discards name of program, sys.argv[0]
     if arg[0] == "-": # flag
-        if lastFlag != "d":
+        if lastFlag != "d" and lastFlag != "i":
             if arg[1] == "f": # fast mode - less accurate...
                 speed = True
                 print("speed mode on with -f flag")
             elif arg[1] == "d": # select different
                 lastFlag = "d"
                 continue
+            elif arg[1] == "i":
+                lastFlag = "i"
+                continue
             else:
                 print("error: unrecognized flag: " + str(arg))
                 sys.exit(1)
-        else:
+        elif lastFlag == "d":
             print("error: no value given after -d flag")
+            sys.exit(1)
+        elif lastFlag == "i":
+            print("error: no value given after -i flag")
+            sys.exit(1)
+        else:
+            print("error: if you\'re seeing this, then the program has reached a presumably unreachable point; please report this bug on https://github.com/ComputerGuy980/keyshell")
             sys.exit(1)
     else:
         if lastFlag == "d":
             device = arg
+            lastFlag = None
+            print("selected new device: " + str(device))
+        elif lastFlag == "i":
+            mode = 2
+            inputfile = arg
+            lastFlag = None
+            print("reading from file: " + str(inputfile))
         else:
             print("error: unrecognized argument: " + str(arg))
             sys.exit(1)
 
 if lastFlag == "d":
     print("error: no value given after -d flag")
-    sys.exit(1)  
+    sys.exit(1)
+elif lastFlag == "i":
+    print("error: no value given after -i flag")
+    sys.exit(1)
 
 if speed:
     def output(code,modifier=NULL):
-        with open(device, 'rb+') as kb:
-            hidbytes = modifier + NULL*2 + code + NULL*4
-            kb.write(hidbytes.encode())
-        #print(hidbytes.encode())
+        #with open(device, 'rb+') as kb:
+        hidbytes = modifier + NULL*2 + code + NULL*4
+            #kb.write(hidbytes.encode())
+        print(hidbytes.encode())
 else:
     def output(code,modifier=NULL):
         hidbytes = modifier + NULL*2 + code + NULL*4
@@ -65,8 +85,9 @@ if speed:
     def flush():
         nullcode = NULL*8
         
-        with open(device, 'rb+') as kb:
-            kb.write(nullcode.encode())
+##        with open(device, 'rb+') as kb:
+##            kb.write(nullcode.encode())
+        print(nullcode.encode())
 else:
     def flush():
 
@@ -83,12 +104,13 @@ else:
 ##            print(c.encode())
 ##        buffer = []
 
-print()
-print("Keyshell for Raspberry Pi Zero")
-print("Press CTRL-C to quit")
-print()
-print("Press enter on an empty line to switch between act and type mode")
-print("act codes: n - ENTER, e - ESC, b - DEL, t - TAB, s - secondary SPACE")
+if mode == 0 or mode == 1:
+    print()
+    print("Keyshell for Raspberry Pi Zero")
+    print("Press CTRL-C to quit")
+    print()
+    print("Press enter on an empty line to switch between act and type mode")
+    print("act codes: n - ENTER, e - ESC, b - DEL, t - TAB, s - secondary SPACE")
 
 while True:
     try:
@@ -113,7 +135,7 @@ while True:
                         break
                 lastKey = current
             flush()
-        else:
+        elif mode == 1:
             lastKey = None
             command = input("keyshell act> ")
 
@@ -131,6 +153,24 @@ while True:
                     break
                 lastKey = current
             flush()
+        elif mode == 2:
+            with open(inputfile,'r') as ip:
+                for current in ip.read().strip():
+                    if current == lastKey:
+                        output(chr(0)) #create gap between double letters
+                    if keysdec.getChr(current) != None:
+                        output(keysdec.getChr(current))
+                    else:
+                        if keysdec.getUpChr(current) != None:
+                            output(keysdec.getUpChr(current),chr(32))
+                        else:
+                            print("unrecognized character: " + current)
+                            break
+                lastKey = current
+            flush()
+            print("done.")
+            sys.exit(0)
+            
     except KeyboardInterrupt:
         print("Exiting...")
         sys.exit()
