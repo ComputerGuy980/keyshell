@@ -21,11 +21,15 @@ Now you can use keyshell.
 
 ----
 
-Once you've followed the instructions in the tutorials, simply run "keyshell.py" as root in the same directory as "keysdec.py".
+How to Use:
 
 If your HID device is located somewhere other than "/dev/hidg0", update line 27 of "keyshell.py".
 
-When you run "keyshell.py", you should see some introductory lines and then a "keyshell>" prompt. Type at this prompt to send character keystrokes.
+Add "setupkeyboard" to /etc/rc.local so that it is run on each boot.
+
+Run "setup" as root. This will allow you to use the "keyshell" command to start keyshell.
+
+When you run keyshell, you will be able to enter text at the "keyshell>" prompt.
 
 You can also press enter on an empty line to switch in and out of action mode (where you can enter action keys, as opposed to character keys.
 
