@@ -20,7 +20,7 @@ https://www.rmedgar.com/blog/using-rpi-zero-as-keyboard-setup-and-device-definit
 
 How to Use:
 
-If your HID device is located somewhere other than "/dev/hidg0", update line 27 of "keyshell.py".
+If your HID device is located somewhere other than "/dev/hidg0", use the -d flag, explained below under "Command Line Arguments"
 
 Run "setup" as root. This will allow you to use the "keyshell" command to start keyshell as well as other essential commands such as "setupkeyboard".
 
