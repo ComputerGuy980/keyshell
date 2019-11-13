@@ -10,14 +10,22 @@ hidbytes = NULL*8
 buffer = []
 lastKey = None
 mode = 0
+speed = False
+
+if speed:
+    def output(code,modifier=NULL):
+        with open('/dev/hidg0', 'rb+') as kb:
+            hidbytes = modifier + NULL*2 + code + NULL*4
+            kb.write(hidbytes.encode())
+            #print(hidbytes.encode())
+else:
+    def output(code,modifier=NULL):
+        hidbytes = modifier + NULL*2 + code + NULL*4
+        buffer.append(hidbytes)
+        unpress()
 
 def unpress():
     hidbytes = NULL*8
-
-def output(code,modifier=NULL):
-    hidbytes = modifier + NULL*2 + code + NULL*4
-    buffer.append(hidbytes)
-    unpress()
 
 def flush():
 
@@ -27,18 +35,16 @@ def flush():
     with open('/dev/hidg0', 'rb+') as kb:
         for c in buffer:
             kb.write(c.encode())
-            sleep(0.05)
         buffer = []
 
 ##    for c in buffer:
 ##        #os.system("echo -ne \"" + c + "\" > /dev/hidg0")
 ##        print(c.encode())
-##        sleep(0.05)
 ##    buffer = []
 
 print("Keyshell for Raspberry Pi Zero")
 print("Press CTRL-C to quit")
-print("Press enter on an empty line to switch between action and typing modes")
+print("Press enter on an empty line to switch between act and type mode")
 print("act codes: n - ENTER, e - ESC, b - DEL, t - TAB, s - secondary SPACE")
 
 while True:
@@ -63,7 +69,8 @@ while True:
                         print("unrecognized character: " + current)
                         break
                 lastKey = current
-            flush()
+            if not speed:
+                flush()
         else:
             lastKey = None
             command = input("keyshell act> ")
