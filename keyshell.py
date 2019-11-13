@@ -88,7 +88,8 @@ while True:
                     print("unrecognized character: " + current)
                     break
                 lastKey = current
-            flush()
+            if not speed:
+                flush()
     except KeyboardInterrupt:
         print("Exiting...")
         sys.exit()
