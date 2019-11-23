@@ -68,10 +68,10 @@ elif lastFlag == "i":
 
 if speed:
     def output(code,modifier=NULL):
-        #with open(device, 'rb+') as kb:
-        hidbytes = modifier + NULL*2 + code + NULL*4
-            #kb.write(hidbytes.encode())
-        print(hidbytes.encode())
+        with open(device, 'rb+') as kb:
+            hidbytes = modifier + NULL*2 + code + NULL*4
+            kb.write(hidbytes.encode())
+        #print(hidbytes.encode())
 else:
     def output(code,modifier=NULL):
         hidbytes = modifier + NULL*2 + code + NULL*4
@@ -85,9 +85,9 @@ if speed:
     def flush():
         nullcode = NULL*8
         
-##        with open(device, 'rb+') as kb:
-##            kb.write(nullcode.encode())
-        print(nullcode.encode())
+        with open(device, 'rb+') as kb:
+            kb.write(nullcode.encode())
+        #print(nullcode.encode())
 else:
     def flush():
 
