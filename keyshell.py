@@ -155,19 +155,20 @@ while True:
             flush()
         elif mode == 2:
             with open(inputfile,'r') as ip:
-                for current in ip.read().strip():
-                    if current == lastKey:
-                        output(chr(0)) #create gap between double letters
-                    if keysdec.getChr(current) != None:
-                        output(keysdec.getChr(current))
-                    else:
-                        if keysdec.getUpChr(current) != None:
-                            output(keysdec.getUpChr(current),chr(32))
+                for line in ip.read().split("\n"):
+                    for current in line:
+                        if current == lastKey:
+                            output(chr(0)) #create gap between double letters
+                        if keysdec.getChr(current) != None:
+                            output(keysdec.getChr(current))
                         else:
-                            print("unrecognized character: " + current)
-                            break
-                lastKey = current
-            flush()
+                            if keysdec.getUpChr(current) != None:
+                                output(keysdec.getUpChr(current),chr(32))
+                            else:
+                                print("unrecognized character: " + current)
+                                break
+                    lastKey = current
+                flush()
             print("done.")
             sys.exit(0)
             
