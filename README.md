@@ -12,9 +12,7 @@ To use this, you need to configure your Raspi as a USB HID gadget using ConfigFS
 To summarize HID gadget setup: add "dwc2" and "libcomposite" lines at the end of DATA/etc/modules on your MicroSD card; also, add "dtoverlay=dwc2" to the end of BOOT/config.txt.
 
 
-This tutorial, from rmedgar.com, explains how that works in detail:
-
-https://www.rmedgar.com/blog/using-rpi-zero-as-keyboard-setup-and-device-definition
+<a href="https://www.rmedgar.com/blog/using-rpi-zero-as-keyboard-setup-and-device-definition">This tutorial</a>, from rmedgar.com, explains how that works in detail.
 
 ----
 
@@ -27,7 +25,7 @@ https://www.rmedgar.com/blog/using-rpi-zero-as-keyboard-setup-and-device-definit
     setupkeyboard
     
 
-You should "setupkeyboard" to /etc/rc.local so that it is run on each boot.
+You should add "setupkeyboard" to <a href="https://www.raspberrypi.org/documentation/linux/usage/rc-local.md">/etc/rc.local</a> so that it is run on each boot.
 
 **How to Use:**
 
