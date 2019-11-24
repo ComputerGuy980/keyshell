@@ -7,10 +7,12 @@ echo "Copying python scripts to new directory"
 sudo cp keyshell.py /usr/local/keyshell/keyshell.py
 sudo cp keysdec.py /usr/local/keyshell/keysdec.py
 
-echo "Placing setupkeyboard script in /usr/local/bin"
+echo "Placing default setupkeyboard script in /usr/local/bin"
 sudo chmod 755 setupkeyboard
 sudo cp setupkeyboard /usr/local/bin/setupkeyboard
 
 echo "Placing keyshell script in /usr/local/bin"
 sudo chmod 755 keyshell
 sudo cp keyshell /usr/local/bin/keyshell
+
+echo "Run setupkeyboard to get started."

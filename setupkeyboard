@@ -2,6 +2,16 @@
 
 ### NOTE - This script is from rmedgar.com, I am only including this slightly modified version to make setup easier for users.
 ### I am not trying to assert ownership over this script in any way.
+echo "Setting up keyboard"
+
+echo "Enter keyboard manufacturer string: "
+read manufacturer
+
+echo "Enter keyboard product name: "
+read product
+
+echo "Enter keyboard serial number: "
+read serialnumber
 
 # Create gadget
 mkdir /sys/kernel/config/usb_gadget/mykeyboard
@@ -20,9 +30,9 @@ echo 0x1d6b > idVendor # Linux Foundation
 # Create English locale
 mkdir strings/0x409
 
-echo "ComputerGuy980" > strings/0x409/manufacturer
-echo "KeyShell" > strings/0x409/product
-echo "0123456789" > strings/0x409/serialnumber
+echo $manufacturer > strings/0x409/manufacturer
+echo $product > strings/0x409/product
+echo $serialnumber > strings/0x409/serialnumber
 
 # Create HID function
 mkdir functions/hid.usb0
