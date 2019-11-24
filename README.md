@@ -1,9 +1,7 @@
 # keyshell
-Yet another HID keyboard gadget script, made for Raspberry Pi Zero W.
+An HID keyboard gadget script, made for injecting text in real time with a Raspberry Pi Zero W.
 
 The intention of this project is to make it very easy to remotely connect (generally <a href="https://www.raspberrypi.org/documentation/remote-access/ssh/README.md">ssh</a>) into your Pi Zero and encode and send groups of keystrokes to the host machine in real time.
-
-If you are using the pi as, say, a wifi AP for control (I do, for use anywhere) then you cannot use "git clone". Therefore, have to copy the files to /home/pi on the MicroSD card, or use <a href="https://www.raspberrypi.org/documentation/remote-access/ssh/scp.md">scp</a> and the like.
 
 Written in Python.
 
@@ -20,14 +18,17 @@ To summarize HID gadget setup: add "dwc2" and "libcomposite" lines at the end of
 
 **How to Setup:**
 
+    git clone https://github.com/computerguy980/keyshell
+    
     cd /path/to/files # e.g. /home/pi/keyshell
     
     sudo bash setup
     
     sudo setupkeyboard
     
-
 You should add "setupkeyboard" to <a href="https://www.raspberrypi.org/documentation/linux/usage/rc-local.md">/etc/rc.local</a> so that it is run on each boot.
+
+If you are using the pi as, say, a <a href = "https://www.raspberrypi.org/documentation/configuration/wireless/access-point.md" > WiFi Access Point</a> to control it outside your home network (I do) then you cannot use "git clone". Therefore, you have to copy the files to /home/pi on the MicroSD card from another computer, or use <a href="https://www.raspberrypi.org/documentation/remote-access/ssh/scp.md">scp</a> and the like to add them while connected to the Pi.
 
 **How to Use:**
 
