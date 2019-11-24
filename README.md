@@ -1,7 +1,9 @@
 # keyshell
 Yet another HID keyboard gadget script, made for Raspberry Pi Zero W.
 
-The intention of this project is to make it very easy to remotely connect (generally ssh) into your Pi Zero and encode and send groups of keystrokes to the host machine in real time.
+The intention of this project is to make it very easy to remotely connect (generally <a href="https://www.raspberrypi.org/documentation/remote-access/ssh/README.md">ssh</a>) into your Pi Zero and encode and send groups of keystrokes to the host machine in real time.
+
+If you are using the pi as, say, a wifi AP for control (I do, for use anywhere) then you cannot use "git clone". Therefore, have to copy the files to /home/pi on the MicroSD card, or use <a href="https://www.raspberrypi.org/documentation/remote-access/ssh/scp.md">scp</a> and the like.
 
 Written in Python.
 
