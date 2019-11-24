@@ -18,11 +18,20 @@ https://www.rmedgar.com/blog/using-rpi-zero-as-keyboard-setup-and-device-definit
 
 ----
 
-How to Use:
+**How to Setup:**
 
-Run "setup" as root. This will allow you to use the "keyshell" command to start keyshell as well as other essential commands such as "setupkeyboard".
+    cd /path/to/files # e.g. /home/pi/keyshell
+    
+    sudo bash setup
+    
+    setupkeyboard
+    
 
-Add "setupkeyboard" to /etc/rc.local so that it is run on each boot.
+You should "setupkeyboard" to /etc/rc.local so that it is run on each boot.
+
+**How to Use:**
+
+    keyshell
 
 When you run keyshell, you will be able to enter text at the "keyshell>" prompt.
 
