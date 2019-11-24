@@ -22,7 +22,7 @@ To summarize HID gadget setup: add "dwc2" and "libcomposite" lines at the end of
     
     sudo bash setup
     
-    setupkeyboard
+    sudo setupkeyboard
     
 
 You should add "setupkeyboard" to <a href="https://www.raspberrypi.org/documentation/linux/usage/rc-local.md">/etc/rc.local</a> so that it is run on each boot.
