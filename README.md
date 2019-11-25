@@ -36,7 +36,7 @@ If you are using the pi as, say, a <a href = "https://www.raspberrypi.org/docume
 
 When you run keyshell, you will be able to enter text at the "keyshell>" prompt.
 
-You can also press enter on an empty line to switch in and out of action mode (where you can enter modifier keys, as opposed to character keys.
+You can also press enter on an empty line to switch in and out of action mode (where you can enter modifier keys, as opposed to character keys.)
 
 If your HID device is located somewhere other than "/dev/hidg0", use the -d flag, explained below under "Command Line Arguments"
 
